@@ -4,25 +4,31 @@
 
 // Set up an empty cart for use on this page.
 const cart = new Cart([]);
+let options = [];
 
 // On screen load, we call this method to put all of the product options
 // (the things in the Product.allProducts array) into the drop down list.
 function populateForm() {
 
-  //TODO: Add an <option> tag inside the form's select for each product
+  //DONE: Add an <option> tag inside the form's select for each product
+
   const selectElement = document.getElementById('items');
   for (let i in Product.allProducts) {
-
+    let productItem = document.createElement('option');
+    productItem.textContent = Product.allProducts[i].name;
+    productItem.value = Product.allProducts[i].name;
+    selectElement.appendChild(productItem);
+    // console.log(selectElement.selectedOptions[0].value);
+    options.push(productItem);
   }
-
 }
 
 // When someone submits the form, we need to add the selected item to the cart
 // object, save the whole thing back to local storage and update the screen
 // so that it shows the # of items in the cart and a quick preview of the cart itself.
 function handleSubmit(event) {
-
-  // TODO: Prevent the page from reloading
+  event.preventDefault();
+  // DONE: Prevent the page from reloading
 
   // Do all the things ...
   addSelectedItemToCart();
@@ -34,6 +40,19 @@ function handleSubmit(event) {
 
 // TODO: Add the selected item and quantity to the cart
 function addSelectedItemToCart() {
+  const selectElement = document.getElementById('items');
+  // let value = selectElement.value;
+  // let text = selectElement.options[selectElement.selectedIndex].text;
+  // console.log(text);
+  // console.log(options);
+  for (let i = 0; i < options.length; i++) {
+    if (options[i].value === selectElement.value) {
+      let quantityAmt = document.getElementById('quantity');
+      console.log(options[i].value);
+      console.log(quantityAmt.value);
+    }
+
+  }
   // TODO: suss out the item picked from the select list
   // TODO: get the quantity
   // TODO: using those, add one item to the Cart
