@@ -18,7 +18,6 @@ function populateForm() {
     productItem.textContent = Product.allProducts[i].name;
     productItem.value = Product.allProducts[i].name;
     selectElement.appendChild(productItem);
-    // console.log(selectElement.selectedOptions[0].value);
     options.push(productItem);
   }
 }
@@ -41,22 +40,41 @@ function handleSubmit(event) {
 // TODO: Add the selected item and quantity to the cart
 function addSelectedItemToCart() {
   const selectElement = document.getElementById('items');
-  // let value = selectElement.value;
-  // let text = selectElement.options[selectElement.selectedIndex].text;
-  // console.log(text);
-  // console.log(options);
+  let quantityAmt = document.getElementById('quantity');
+  console.log(quantityAmt.value);
+  // console.log('options: ' + options);
   for (let i = 0; i < options.length; i++) {
     if (options[i].value === selectElement.value) {
-      let quantityAmt = document.getElementById('quantity');
-      console.log(options[i].value);
-      console.log(quantityAmt.value);
-    }
+      // console.log(options[i].value);
 
-  }
-  // TODO: suss out the item picked from the select list
-  // TODO: get the quantity
+      for(let j = 0; j < Product.allProducts.length; j++){
+
+        if(options[i].value === selectElement.value) {
+          // console.log('options: ' + options[i].value);
+          if(Product.allProducts[j].name === options[i].value){
+
+            let newItem = cart.addItem(Product.allProducts[j], quantityAmt.value);
+            console.log(cart.items);
+          }
+        }
+      
+      
+      // console.log(options[i].value);
+      // console.log(quantityAmt.value);
+      // console.log(Product.allProducts);
+      }
+
+    }
+  // DONE: suss out the item picked from the select list
+  // DONE: get the quantity
   // TODO: using those, add one item to the Cart
+  }
 }
+
+// const CartItem = function(product, quantity) {
+//   this.product = product;
+//   this.quantity = quantity;
+// };
 
 // TODO: Update the cart count in the header nav with the number of items in the Cart
 function updateCounter() { }
